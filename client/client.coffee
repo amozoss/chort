@@ -292,8 +292,10 @@ dom.KEYBOARD = ->
     text = "#{username} ready!"
 
   DIV
+    style:
+      pointerEvents: if state.login == 3 then "none" else "auto"
     className: "keyboard"
-    color: "red"
+    color: "yellow"
     text
     dom.KEYPAD()
     dom.REMAINING()
@@ -421,6 +423,8 @@ dom.CHORE_CHART = ->
       return null if kids[kid].invisible
       DIV
         className: "kid"
+        style:
+          "-webkit-tap-highlight-color": kids[kid].color
         key: kid
         DIV
           className: "kid-picture-container"
@@ -468,23 +472,28 @@ dom.CHORE_CHART = ->
                 '+'
             ]
 
-        kidChores(kid).map (chore) ->
-          key = "/#{today()}/#{kid}/#{chore}"
-          done = state[key]
-          DIV
-            key: chore
-            className: "chore"
-            backgroundColor: if done then kids[kid].color else "black"
-            opacity: if done then "1.0" else "0.5"
-            title: chore
-            onClick: ->
-              if checkMouse(kid)
-                resetLogoutTimer()
-                toggleChore kid, chore
-            IMG
-              key: "chore-picture"
-              src: "/emoji/emoji_u#{choreIcons[chore]}.svg"
-              alt: chore
+        DIV
+          className: "kid-chores"
+          style:
+            "-webkit-tap-highlight-color": kids[kid].color
+          key: kid
+          kidChores(kid).map (chore) ->
+            key = "/#{today()}/#{kid}/#{chore}"
+            done = state[key]
+            DIV
+              key: chore
+              className: "chore"
+              backgroundColor: if done then kids[kid].color else "black"
+              opacity: if done then "1.0" else "0.5"
+              title: chore
+              onClick: ->
+                if checkMouse(kid)
+                  resetLogoutTimer()
+                  toggleChore kid, chore
+              IMG
+                key: "chore-picture"
+                src: "/emoji/emoji_u#{choreIcons[chore]}.svg"
+                alt: chore
 
 lastSound = 0
 dom.SOUND = ->

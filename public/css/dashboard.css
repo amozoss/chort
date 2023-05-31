@@ -7,21 +7,24 @@ body {
 }
 .container {
   position: relative;
-  width: 1920px;
-  height: 1440px;
+  height: 100vh;
 }
 .chore-chart {
   display: flex;
-  position: absolute;
-  right: 0;
-  top: 0;
+  align-items: flex-start;
 }
 .kid {
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding: 10px;
+  flex-wrap: wrap;
   cursor: pointer;
+}
+.kid-chores {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 65vh;
 }
 .kid-picture-container {
   position: relative;
@@ -78,6 +81,7 @@ body {
   cursor: pointer;
   border-radius: 50%;
   margin: 5px;
+  padding: 5px;
 }
 .chore img {
   width: 50px;
@@ -96,6 +100,12 @@ body {
   bottom: 0;
   margin: 20px;
 }
+@media screen and (max-width: 600px) {
+  .clock {
+    display: none;
+  }
+}
+
 .clock .date {
   font-size: 40px;
 }
@@ -116,17 +126,17 @@ body {
 .keyboard {
   position: absolute;
   font-size: 80px;
-  bottom: 0;
+  bottom: 0; 
   left: 100px;
   white-space: "pre";
 }
 .logout-remaining {
-  background: #200;
+  background: #f3f23f60;
   height: 5px;
   padding: 0;
 }
 .logout-remaining-bar {
-  background: #600;
+  background: #f3f23f;
   height: 5px;
   margin: 0;
   padding: 0;
