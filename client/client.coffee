@@ -266,6 +266,7 @@ dom.KEYPAD = ->
     dom.BUTTONS()
     BUTTON
       onClick: ->
+        resetLogoutTimer()
         handleKey "Backspace"
       String.fromCharCode(9003)
 
@@ -273,6 +274,7 @@ dom.BUTTONS = ->
   [1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map (i) ->
     BUTTON
       onClick: ->
+        resetLogoutTimer()
         handleKey "#{i}"
 
       "#{i}"
@@ -438,6 +440,7 @@ dom.CHORE_CHART = ->
                 changeStars kid, 1
                 broadcast 'coin'
               else
+                resetLogoutTimer()
                 state.login = 2
                 state.username = kid
                 state.password = ""
