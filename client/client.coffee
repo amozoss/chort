@@ -506,7 +506,6 @@ dom.BODY = ->
   DIV
     key: 'container'
     className: 'container'
-    MESSAGES()
     CLOCK()
     CHORE_CHART()
     KEYBOARD()
