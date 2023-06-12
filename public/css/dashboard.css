@@ -2,7 +2,7 @@ body {
   background-color: black;
   margin: 0;
   color: rgb(255, 255, 255);
-  font-family: 'Acme';
+  font-family: "Acme";
   font-size: 40px;
 }
 .container {
@@ -10,7 +10,8 @@ body {
   height: 100vh;
 }
 .chore-chart {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   align-items: flex-start;
 }
 .kid {
@@ -24,9 +25,12 @@ body {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  align-items: center;
   height: 65vh;
 }
 .kid-picture-container {
+  display: flex;
+  justify-content: center;
   position: relative;
   margin-bottom: 20px;
 }
@@ -37,7 +41,6 @@ body {
   width: 90px;
   height: 50px;
   text-align: center;
-  left: calc(220px / 2 - 90px / 2 - 10px);
   background: black;
   border-radius: 50%;
   user-select: none;
@@ -67,9 +70,10 @@ body {
   height: 200px;
   object-fit: cover;
   border-radius: 50%;
-  border: 10px solid rgba(0,0,0,0.0);
+  border: 10px solid rgba(0, 0, 0, 0);
 }
 .chore {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,6 +90,40 @@ body {
 .chore img {
   width: 50px;
   height: 50px;
+}
+.chore-amount {
+  cursor: pointer;
+  bottom: -10px;
+  width: 90px;
+  height: 50px;
+  text-align: center;
+  background: black;
+  border-radius: 50%;
+  user-select: none;
+}
+.chore-buttons {
+  z-index: 40;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+}
+.chore-button {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  font-size: 30px;
+  background: black;
+  border-radius: 50%;
+  user-select: none;
+  text-align: center;
+}
+.chore-up {
+  bottom: 0;
+  right: 0;
+}
+.chore-down {
+  bottom: 0;
+  left: 0;
 }
 .clock {
   display: inline-block;
@@ -120,13 +158,13 @@ body {
   color: white;
   background-color: black;
   font-size: 60px;
-  font-family: 'Covered By Your Grace';
+  font-family: "Covered By Your Grace";
   margin: 20px;
 }
 .keyboard {
   position: absolute;
   font-size: 80px;
-  bottom: 0; 
+  bottom: 0;
   left: 100px;
   white-space: "pre";
 }
