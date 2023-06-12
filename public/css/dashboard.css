@@ -101,9 +101,13 @@ body {
   border-radius: 50%;
   user-select: none;
 }
+.chore-container {
+  position: relative;
+}
 .chore-buttons {
   z-index: 40;
   position: absolute;
+  top: -50px;
   display: flex;
   flex-direction: row;
 }

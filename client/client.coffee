@@ -137,6 +137,14 @@ logout = ->
   logoutAt = null
   clearTimeout logoutTimer
 
+  # clear the chore counters
+  Object.keys(kids).forEach (kid) ->
+    for chore in kidChores(kid)
+      [chore, amount] = choreKind(chore)
+      multiChoreToggleKey = "#{kid}/#{chore}"
+      if amount
+        state[multiChoreToggleKey] = false
+
 updateLogoutRemaining = ->
   return null if logoutAt == null
   state.logoutRemaining = logoutAt - Date.now()
@@ -510,27 +518,8 @@ dom.CHORE_CHART = ->
             done = state[key]
             if amount
               done = state[key] >= amount
-            console.log("chore", chore, amount, done)
             DIV
               className: "chore-container"
-              DIV
-                key: chore
-                className: "chore"
-                backgroundColor: if done then kids[kid].color else "black"
-                border: if amount && state[multiChoreToggleKey] then "10px solid #{kids[kid].color}" else ""
-                opacity: if done then "1.0" else "0.5"
-                title: chore
-                onClick: ->
-                  if checkMouse(kid)
-                    resetLogoutTimer()
-                    if amount
-                      state[multiChoreToggleKey] = !state[multiChoreToggleKey]
-                    else
-                      toggleChore kid, chore
-                IMG
-                  key: "chore-picture"
-                  src: "/emoji/emoji_u#{choreIcons[chore]}.svg"
-                  alt: chore
               if state[multiChoreToggleKey]
                 DIV
                   className: "chore-buttons"
@@ -554,6 +543,24 @@ dom.CHORE_CHART = ->
                       changeChore kid, chore, 1
                       broadcast 'stomp'
                     '+'
+              DIV
+                key: chore
+                className: "chore"
+                backgroundColor: if done then kids[kid].color else "black"
+                border: if amount && state[multiChoreToggleKey] then "10px solid #{kids[kid].color}" else ""
+                opacity: if done then "1.0" else "0.5"
+                title: chore
+                onClick: ->
+                  if checkMouse(kid)
+                    resetLogoutTimer()
+                    if amount
+                      state[multiChoreToggleKey] = !state[multiChoreToggleKey]
+                    else
+                      toggleChore kid, chore
+                IMG
+                  key: "chore-picture"
+                  src: "/emoji/emoji_u#{choreIcons[chore]}.svg"
+                  alt: chore
 
 lastSound = 0
 dom.SOUND = ->
