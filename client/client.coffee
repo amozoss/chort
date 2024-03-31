@@ -453,6 +453,12 @@ dom.CHORE_CHART = ->
   DIV
     className: 'chore-chart'
     Object.keys(kids).map (kid) ->
+      isLoggedIn = state.login == 3 && state.username == kid
+
+      if state.login == 3 && state.username != kid
+        return DIV
+                 className: "kid"
+
       return null if kids[kid].invisible
       DIV
         className: "kid"
@@ -509,6 +515,7 @@ dom.CHORE_CHART = ->
         DIV
           className: "kid-chores"
           style:
+            "overflow": if isLoggedIn then "unset" else "hidden"
             "-webkit-tap-highlight-color": kids[kid].color
           key: kid
           kidChores(kid).map (chore) ->
